@@ -1,11 +1,11 @@
 {
   "name": "arena",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "kind": "mini-app",
   "title": "Arena",
   "tagline": "A deathmatch for two, live in your chat",
   "description": "Open Arena in a chat, host a match on one of ten maps, and your contact joins from the invitation. One side's game runs the server and the other connects to it over the chat's live connection. Keyboard and mouse. Built on FTEQW, a GPL engine descended from id Software's Quake engine, with LibreQuake's free maps, models and sounds.",
-  "releaseNotes": "The first version: deathmatch for two on ten LibreQuake maps, hosted by one side and joined over the chat.",
+  "releaseNotes": "Mouse look as in any shooter: a click in the game holds the mouse, and Esc gives it back. Needs a Ghostly that lets apps hold the pointer; older ones keep the edge turning.",
   "entry": "index.html",
   "permissions": ["chat", "name"],
   "view": "full",

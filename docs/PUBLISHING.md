@@ -17,7 +17,7 @@ is checked by CI; "Sign" and the store's index are the owner's steps.
 | Manifest `name` | `arena` (the app's reference is `<publisher key>/arena`: it can never change after the first signature) |
 | Publisher key file (owner's machine only) | `~/ghostly-keys/arena-publisher.key`, made by the first `ghostly app publish`. **Back it up**: an app is updated only with the key that signed it |
 | Store folder | `apps/arena.<first 16 characters of the publisher key>/` |
-| Published so far | nothing yet. See [CHANGES.md](../CHANGES.md) |
+| Published so far | 1.0.0 (sequence 1). See [CHANGES.md](../CHANGES.md) |
 
 The bundle is about 14 MiB (`npm run digest`): the page, `game/engine.wasm.gz`, `game/arena.pk3` and `icon.png`. It is
 under the 16 MiB a bundle may hold and the 20 MB jsDelivr serves.

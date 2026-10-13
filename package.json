@@ -1,7 +1,7 @@
 {
   "name": "ghostly-arena",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "A deathmatch for two in a chat: a Ghostly mini-app built on the FTEQW engine with LibreQuake's free data.",
   "license": "GPL-2.0-only",

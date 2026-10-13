@@ -1,8 +1,9 @@
 /**
- * Mouse look in a frame that cannot lock the pointer (the runner's sandbox refuses it). The patched engine glue reads
- * each mousemove's movementX/Y while the game wants the mouse (engine/patches), so moving the mouse aims. A pointer
- * cannot pass the frame's edge, so while it rests at the left or right edge this keeps turning the view, by sending
- * the engine the movement it would have had: `speed` degrees a second, at the person's sensitivity.
+ * Mouse look. A click in the game asks for the pointer lock, as FTEQW does on the web, and with it the mouse turns the
+ * view as in any shooter (Esc gives it back). A Ghostly from before 2026-10-13 refuses the lock in its sandbox: there
+ * the patched engine glue reads each mousemove's movementX/Y while the game wants the mouse (engine/patches), and,
+ * since a pointer cannot pass the frame's edge, this keeps turning the view while it rests at the left or right edge,
+ * by sending the engine the movement it would have had: `speed` degrees a second, at the person's sensitivity.
  */
 
 /** The share of the frame's width, at each side, where the view keeps turning. */
@@ -46,6 +47,7 @@ export class EdgeTurn {
   setActive(active: boolean): void {
     this.active = active;
     this.target.style.cursor = active ? "none" : "";
+    if (!active) this.side = 0;
     if (active && !this.frame) {
       this.last = performance.now();
       this.frame = requestAnimationFrame((t) => this.tick(t));
@@ -58,7 +60,7 @@ export class EdgeTurn {
     const ms = Math.min(100, now - this.last);
     this.last = now;
     const { speed, sensitivity } = this.settings();
-    if (this.side !== 0 && speed > 0) {
+    if (this.side !== 0 && speed > 0 && !document.pointerLockElement) {
       const counts = edgeCounts(speed, ms, sensitivity) * this.side + this.remainder;
       const whole = Math.trunc(counts);
       this.remainder = counts - whole;

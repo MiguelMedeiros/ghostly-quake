@@ -1,6 +1,13 @@
 # Changes
 
-## 1.0.0 (not published yet)
+## 1.0.1
+
+- Mouse look as in any shooter: a click in the game asks for the pointer lock, the mouse turns the view freely, and Esc
+  gives it back (and opens the engine's menu). It needs a Ghostly whose runner lets apps hold the pointer (2026-10-13);
+  in an older one the lock is refused and the edge turning of 1.0.0 stays. Plays with 1.0.0: the engine's packets and
+  the game data did not change.
+
+## 1.0.0 (sequence 1, 2026-10-13)
 
 The first version.
 

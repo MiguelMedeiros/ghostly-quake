@@ -40,7 +40,7 @@ export const en = {
   edgeTurn: "Turn at the edges",
   controls: "Controls",
   controlsText:
-    "Move with W A S D, jump with Space, shoot with the left button, change weapons with 1 to 8 or the wheel. The frame cannot capture the mouse, so move it to aim, rest it at the left or right edge to keep turning, or turn with the arrow keys. Tab shows the scores, Esc the engine's menu.",
+    "Move with W A S D, jump with Space, shoot with the left button, change weapons with 1 to 8 or the wheel. Click in the game to take the mouse for aiming; Esc gives it back and opens the engine's menu. Tab shows the scores. On an older Ghostly that cannot hold the mouse, rest it at the left or right edge to keep turning, or turn with the arrows.",
   needsKeyboard: "Arena needs a keyboard and a mouse.",
   stats: "{rtt} ms · {fps} fps · {kbps} KB/s",
   credits: "Built on FTEQW, a GPL engine descended from id Software's Quake engine, with LibreQuake's free maps and art.",

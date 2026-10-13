@@ -36,7 +36,7 @@ export const pt: Strings = {
   edgeTurn: "Girar nas bordas",
   controls: "Controles",
   controlsText:
-    "Ande com W A S D, pule com Espaço, atire com o botão esquerdo, troque de arma com 1 a 8 ou a roda. O quadro não pode capturar o mouse: mova-o para mirar, deixe-o na borda esquerda ou direita para continuar girando, ou gire com as setas. Tab mostra o placar, Esc o menu do motor.",
+    "Ande com W A S D, pule com Espaço, atire com o botão esquerdo, troque de arma com 1 a 8 ou a roda. Clique no jogo para prender o mouse e mirar; Esc solta o mouse e abre o menu do motor. Tab mostra o placar. Num Ghostly antigo que não prende o mouse, deixe-o na borda esquerda ou direita para continuar girando, ou gire com as setas.",
   needsKeyboard: "A Arena precisa de teclado e mouse.",
   stats: "{rtt} ms · {fps} fps · {kbps} KB/s",
   credits: "Feito com o FTEQW, um motor GPL descendente do motor do Quake da id Software, com os mapas e a arte livres do LibreQuake.",
@@ -78,7 +78,7 @@ export const es: Strings = {
   edgeTurn: "Girar en los bordes",
   controls: "Controles",
   controlsText:
-    "Muévete con W A S D, salta con Espacio, dispara con el botón izquierdo, cambia de arma con 1 a 8 o la rueda. El marco no puede capturar el ratón: muévelo para apuntar, déjalo en el borde izquierdo o derecho para seguir girando, o gira con las flechas. Tab muestra el marcador, Esc el menú del motor.",
+    "Muévete con W A S D, salta con Espacio, dispara con el botón izquierdo, cambia de arma con 1 a 8 o la rueda. Haz clic en el juego para capturar el ratón y apuntar; Esc lo suelta y abre el menú del motor. Tab muestra el marcador. En un Ghostly antiguo que no captura el ratón, déjalo en el borde izquierdo o derecho para seguir girando, o gira con las flechas.",
   needsKeyboard: "Arena necesita teclado y ratón.",
   stats: "{rtt} ms · {fps} fps · {kbps} KB/s",
   credits: "Hecho con FTEQW, un motor GPL descendiente del motor de Quake de id Software, con los mapas y el arte libres de LibreQuake.",
@@ -120,7 +120,7 @@ export const fr: Strings = {
   edgeTurn: "Tourner aux bords",
   controls: "Commandes",
   controlsText:
-    "Déplacez-vous avec W A S D, sautez avec Espace, tirez avec le bouton gauche, changez d’arme avec 1 à 8 ou la molette. Le cadre ne peut pas capturer la souris : bougez-la pour viser, laissez-la au bord gauche ou droit pour continuer à tourner, ou tournez avec les flèches. Tab affiche les scores, Échap le menu du moteur.",
+    "Déplacez-vous avec W A S D, sautez avec Espace, tirez avec le bouton gauche, changez d’arme avec 1 à 8 ou la molette. Cliquez dans le jeu pour capturer la souris et viser ; Échap la libère et ouvre le menu du moteur. Tab affiche les scores. Sur un Ghostly plus ancien qui ne capture pas la souris, laissez-la au bord gauche ou droit pour continuer à tourner, ou tournez avec les flèches.",
   needsKeyboard: "Arena demande un clavier et une souris.",
   stats: "{rtt} ms · {fps} ips · {kbps} Ko/s",
   credits: "Construit sur FTEQW, un moteur GPL issu du moteur de Quake d’id Software, avec les cartes et les graphismes libres de LibreQuake.",
@@ -162,7 +162,7 @@ export const it: Strings = {
   edgeTurn: "Gira ai bordi",
   controls: "Comandi",
   controlsText:
-    "Muoviti con W A S D, salta con Spazio, spara con il tasto sinistro, cambia arma con 1–8 o la rotella. La cornice non può catturare il mouse: muovilo per mirare, lascialo sul bordo sinistro o destro per continuare a girare, oppure gira con le frecce. Tab mostra i punteggi, Esc il menu del motore.",
+    "Muoviti con W A S D, salta con Spazio, spara con il tasto sinistro, cambia arma con 1–8 o la rotella. Clicca nel gioco per catturare il mouse e mirare; Esc lo rilascia e apre il menu del motore. Tab mostra i punteggi. Su un Ghostly più vecchio che non cattura il mouse, lascialo sul bordo sinistro o destro per continuare a girare, oppure gira con le frecce.",
   needsKeyboard: "Arena richiede tastiera e mouse.",
   stats: "{rtt} ms · {fps} fps · {kbps} KB/s",
   credits: "Basato su FTEQW, un motore GPL derivato dal motore di Quake di id Software, con le mappe e la grafica libere di LibreQuake.",
@@ -204,7 +204,7 @@ export const ja: Strings = {
   edgeTurn: "端で回転",
   controls: "操作",
   controlsText:
-    "W A S D で移動、スペースでジャンプ、左クリックで射撃、1〜8 かホイールで武器を切り替え。フレームはマウスを固定できないので、マウスを動かして狙い、左右の端に置くと回り続け、矢印キーでも回れます。Tab でスコア、Esc でエンジンのメニュー。",
+    "W A S D で移動、スペースでジャンプ、左クリックで射撃、1〜8 かホイールで武器を切り替え。ゲーム内をクリックするとマウスを固定して狙えます。Esc で固定を解除してエンジンのメニューを開きます。Tab でスコア。マウスを固定できない古い Ghostly では、左右の端に置くと回り続け、矢印キーでも回れます。",
   needsKeyboard: "Arena にはキーボードとマウスが必要です。",
   stats: "{rtt} ms · {fps} fps · {kbps} KB/s",
   credits: "id Software の Quake エンジンから派生した GPL エンジン FTEQW と、LibreQuake の自由なマップとアートで作られています。",
@@ -246,7 +246,7 @@ export const zh: Strings = {
   edgeTurn: "边缘转向",
   controls: "操作",
   controlsText:
-    "用 W A S D 移动，空格跳跃，左键射击，1 到 8 或滚轮切换武器。框架无法锁定鼠标：移动鼠标瞄准，停在左右边缘可持续转向，也可以用方向键转向。Tab 显示比分，Esc 打开引擎菜单。",
+    "用 W A S D 移动，空格跳跃，左键射击，1 到 8 或滚轮切换武器。点击游戏画面即可锁定鼠标瞄准；Esc 释放鼠标并打开引擎菜单。Tab 显示比分。在无法锁定鼠标的旧版 Ghostly 中，把鼠标停在左右边缘可持续转向，也可以用方向键转向。",
   needsKeyboard: "Arena 需要键盘和鼠标。",
   stats: "{rtt} 毫秒 · {fps} 帧 · {kbps} KB/秒",
   credits: "基于 FTEQW（源自 id Software 的 Quake 引擎的 GPL 引擎）制作，使用 LibreQuake 的自由地图和美术。",
@@ -288,7 +288,7 @@ export const ar: Strings = {
   edgeTurn: "الدوران عند الحواف",
   controls: "التحكم",
   controlsText:
-    "تحرّك بـ W A S D، واقفز بالمسافة، وأطلق بالزر الأيسر، وبدّل السلاح بالأرقام 1 إلى 8 أو العجلة. لا يستطيع الإطار حبس الفأرة: حرّكها للتصويب، واتركها عند الحافة اليسرى أو اليمنى لتواصل الدوران، أو استدر بالأسهم. Tab يعرض النتائج، وEsc قائمة المحرك.",
+    "تحرّك بـ W A S D، واقفز بالمسافة، وأطلق بالزر الأيسر، وبدّل السلاح بالأرقام 1 إلى 8 أو العجلة. انقر في اللعبة لحبس الفأرة والتصويب؛ Esc يحرّرها ويفتح قائمة المحرك. Tab يعرض النتائج. في نسخة Ghostly قديمة لا تحبس الفأرة، اتركها عند الحافة اليسرى أو اليمنى لتواصل الدوران، أو استدر بالأسهم.",
   needsKeyboard: "يحتاج Arena إلى لوحة مفاتيح وفأرة.",
   stats: "{rtt} مللي ث · {fps} إطار · {kbps} ك.ب/ث",
   credits: "مبني على FTEQW، محرك GPL منحدر من محرك Quake لشركة id Software، مع خرائط LibreQuake وفنها الحر.",

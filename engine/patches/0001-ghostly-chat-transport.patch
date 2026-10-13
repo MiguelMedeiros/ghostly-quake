@@ -34,7 +34,7 @@ index 3af47a0..a632645 100644
  	else
  		datasocket = emscriptenfte_ws_connect(adr.address.websocketurl, "fteqw");
 diff --git a/engine/web/ftejslib.js b/engine/web/ftejslib.js
-index bc04299..a769677 100644
+index bc04299..f36abda 100644
 --- a/engine/web/ftejslib.js
 +++ b/engine/web/ftejslib.js
 @@ -189,7 +189,8 @@ mergeInto(LibraryManager.library,
@@ -42,20 +42,11 @@ index bc04299..a769677 100644
  					if (FTEC.evcb.mouse != 0)
  					{
 -						if (Browser.pointerLock)
-+						//ghostly: the runner's sandbox refuses pointer locks. In game, mouse look uses the deltas every mousemove carries.
++						//ghostly: where the runner refuses the pointer lock (a Ghostly before 2026-10-13), mouse look in game uses the deltas every mousemove carries.
 +						if (Browser.pointerLock || (Module["relativeMouse"] && FTEC.pointerwantlock))
  						{
  							if (typeof event.movementX === 'undefined')
  							{
-@@ -214,7 +215,7 @@ mergeInto(LibraryManager.library,
- 					window.focus();
- 					//Mozilla docs say do the pointerlock request first...
- 					//older browsers only allowed pointer lock when fullscreen. maybe it'll need two clicks. sucks to be you.
--					if (FTEC.pointerwantlock != 0 && FTEC.pointerislocked == 0)
-+					if (FTEC.pointerwantlock != 0 && FTEC.pointerislocked == 0 && !Module["relativeMouse"])
- 					{
- 						var v;
- 						try
 @@ -255,7 +256,7 @@ mergeInto(LibraryManager.library,
  					}
  					//older browsers need fullscreen in order for requestPointerLock to work. Which seems to be deprecated cos of how shitty an experience it is whenever you hit escape to load a menu or w/e
