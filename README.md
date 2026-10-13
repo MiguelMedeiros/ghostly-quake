@@ -32,7 +32,7 @@ needs neither Docker nor the network:
 
 | Input | Made by | Checked by |
 |---|---|---|
-| `engine/dist/fte.js`, `engine/dist/fte.wasm.gz` | `npm run engine`: FTEQW at a pinned commit, `engine/patches/` applied, compiled in a pinned `emscripten/emsdk` image (needs Docker; run it under `lockf -k /tmp/ghostly-heavy.lock` on the shared Mac) | `npm run engine -- --check` (CI's engine job), `engine/dist/SHA256SUMS` |
+| `engine/dist/fte.js`, `engine/dist/fte.wasm.gz` | `npm run engine`: FTEQW at a pinned commit, `engine/patches/` applied, compiled in a pinned `emscripten/emsdk` image (needs Docker; run it under `lockf -k /tmp/ghostly-heavy.lock` on the shared Mac) | `npm run engine -- --check` (CI's engine job), `engine/dist/SHA256SUMS`. The arm64 and amd64 images give the same bytes (checked on 2026-10-12, `ENGINE_ARCH=x64` runs CI's image on an arm64 Mac) |
 | `data/arena.pk3` | `npm run gen:data`: LibreQuake v0.09-beta's release archives (pinned by SHA-256), cut to what `data/files.txt` and the maps need, sounds above 22,050 Hz resampled | `npm run gen:data -- --check` (CI) |
 
 ### What the bundle holds
