@@ -1,0 +1,6 @@
+Game data: LibreQuake v0.09-beta, https://github.com/lavenderdotpet/LibreQuake (the deathmatch maps, the models,
+textures, sounds and pictures they use, and the game code). The art and maps are under the BSD-3-Clause licence below.
+The game code (progs.dat, qwprogs.dat: LibreProgsDeluxe, based on id Software's GPL QuakeC 1.01) and gfx/pop.lmp are
+under the GNU General Public License, version 2 or (at your option) any later version. Sounds faster than 22,050 Hz
+were resampled to 22,050 Hz for size. LibreQuake's contributors are listed in assets/librequake/CREDITS of this app's
+source.

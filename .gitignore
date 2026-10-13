@@ -1,0 +1,13 @@
+dist
+node_modules
+release
+engine/.build
+data/.cache
+# Only the signed bundle at the root is committed (docs/PUBLISHING.md): never another bundle, never a key.
+*.ghostlyapp
+!/app.ghostlyapp
+*.key
+*.pem
+test-results
+playwright-report
+engine/dist/fte.wasm

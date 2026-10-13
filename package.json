@@ -1,0 +1,37 @@
+{
+  "name": "ghostly-arena",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "A deathmatch for two in a chat: a Ghostly mini-app built on the FTEQW engine with LibreQuake's free data.",
+  "license": "GPL-2.0-only",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc --noEmit -p tsconfig.json && vite build && node scripts/assets.mjs",
+    "check:bundle": "node scripts/bundle.mjs",
+    "dev": "vite",
+    "digest": "node scripts/digest.mjs",
+    "engine": "node scripts/engine.mjs",
+    "gen:data": "node scripts/data.mjs",
+    "stage": "node scripts/stage.mjs",
+    "test": "vitest run",
+    "test:browser": "npm run build && playwright test",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "26.6.2",
+    "happy-dom": "20.14.5",
+    "typescript": "5.9.3",
+    "vite": "8.3.2",
+    "vitest": "5.0.3"
+  },
+  "overrides": {
+    "rolldown": "1.2.12"
+  },
+  "dependencies": {
+    "fflate": "0.8.2"
+  }
+}

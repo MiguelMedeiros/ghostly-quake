@@ -1,0 +1,93 @@
+diff --git a/engine/Makefile b/engine/Makefile
+index ab4281d..d23a9a0 100644
+--- a/engine/Makefile
++++ b/engine/Makefile
+@@ -1895,6 +1895,9 @@ ifeq ($(FTE_TARGET),web)
+ 	EMCC_LDFLAGS+= -s ALLOW_MEMORY_GROWTH=1			#reduce crashes...
+ 	EMCC_LDFLAGS+= -s MAX_WEBGL_VERSION=2			#make use of what we can.
+ 	EMCC_LDFLAGS+= -s TOTAL_STACK=5MB			#big!
++	EMCC_LDFLAGS+= -s DYNAMIC_EXECUTION=0		#ghostly: the runner's CSP has no 'unsafe-eval'.
++	EMCC_LDFLAGS+= -s ENVIRONMENT=web			#ghostly: a page, never node or a worker.
++	EMCC_LDFLAGS+= -s EXPORTED_FUNCTIONS=_main,_malloc,_free	#ghostly: the page types console commands (FTEC.cbufadd).
+    	EMCC_LDFLAGS+=-s ERROR_ON_UNDEFINED_SYMBOLS=1	#fairly obvious. no runtime errors please.
+ 	RELEASE_CFLAGS=-DOMIT_QCC -DGL_STATIC $(EMCC_CFLAGS)
+ 	DEBUG_CFLAGS=-gsource-map -DOMIT_QCC -DGL_STATIC $(EMCC_CFLAGS)
+diff --git a/engine/common/net_wins.c b/engine/common/net_wins.c
+index 3af47a0..a632645 100644
+--- a/engine/common/net_wins.c
++++ b/engine/common/net_wins.c
+@@ -9278,8 +9278,14 @@ static ftenet_generic_connection_t *FTENET_WebSocket_EstablishConnection(ftenet_
+ 
+ 	if (isserver)
+ 	{
+-		Con_Printf("Browsers are unable to host regular servers. Please use an rtc://broker:port/serverid scheme instead.\n");
+-		datasocket = INVALID_SOCKET;
++		//ghostly: the page carries one peer's packets over its chat, so a listen server can take that one client.
++		if (!strncmp(adr.address.websocketurl, "ws://ghostly.invalid/", 21))
++			datasocket = emscriptenfte_ws_connect(adr.address.websocketurl, "ghostly-host");
++		else
++		{
++			Con_Printf("Browsers are unable to host regular servers. Please use an rtc://broker:port/serverid scheme instead.\n");
++			datasocket = INVALID_SOCKET;
++		}
+ 	}
+ 	else
+ 		datasocket = emscriptenfte_ws_connect(adr.address.websocketurl, "fteqw");
+diff --git a/engine/web/ftejslib.js b/engine/web/ftejslib.js
+index bc04299..a769677 100644
+--- a/engine/web/ftejslib.js
++++ b/engine/web/ftejslib.js
+@@ -189,7 +189,8 @@ mergeInto(LibraryManager.library,
+ 				case 'mousemove':
+ 					if (FTEC.evcb.mouse != 0)
+ 					{
+-						if (Browser.pointerLock)
++						//ghostly: the runner's sandbox refuses pointer locks. In game, mouse look uses the deltas every mousemove carries.
++						if (Browser.pointerLock || (Module["relativeMouse"] && FTEC.pointerwantlock))
+ 						{
+ 							if (typeof event.movementX === 'undefined')
+ 							{
+@@ -214,7 +215,7 @@ mergeInto(LibraryManager.library,
+ 					window.focus();
+ 					//Mozilla docs say do the pointerlock request first...
+ 					//older browsers only allowed pointer lock when fullscreen. maybe it'll need two clicks. sucks to be you.
+-					if (FTEC.pointerwantlock != 0 && FTEC.pointerislocked == 0)
++					if (FTEC.pointerwantlock != 0 && FTEC.pointerislocked == 0 && !Module["relativeMouse"])
+ 					{
+ 						var v;
+ 						try
+@@ -255,7 +256,7 @@ mergeInto(LibraryManager.library,
+ 					}
+ 					//older browsers need fullscreen in order for requestPointerLock to work. Which seems to be deprecated cos of how shitty an experience it is whenever you hit escape to load a menu or w/e
+ 					//newer browsers can still break pointer locks when alt-tabbing, even without breaking fullscreen, so lets spam requests for it. enjoy.
+-					if (!document.fullscreenElement)
++					if (!document.fullscreenElement && !Module["relativeMouse"])
+ 						if (FTEC.evcb.wantfullscreen != 0)
+ 							if ({{{makeDynCall('i','FTEC.evcb.wantfullscreen')}}}())
+ 							{
+@@ -415,6 +416,8 @@ mergeInto(LibraryManager.library,
+ 	},
+ 	emscriptenfte_updatepointerlock : function(wantlock, softcursor)
+ 	{
++		if (FTEC.pointerwantlock != wantlock && Module["onMouseLook"])
++			Module["onMouseLook"](!!wantlock);	//ghostly: the page's edge turning runs only in game.
+ 		FTEC.pointerwantlock = wantlock;
+ 		//we can only apply locks when we're clicked, but should be able to unlock any time.
+ 		if (wantlock == 0 && FTEC.pointerislocked != 0)
+@@ -1212,6 +1215,16 @@ mergeInto(LibraryManager.library,
+ 		var _url = UTF8ToString(brokerurl);
+ 		var _protocol = UTF8ToString(protocolname);
+ 		var s = {ws:null, inq:[], err:0, con:0};
++		//ghostly: the page's chat is the only network. ws://ghostly.invalid/ is its pipe, anything else fails here.
++		if (_url.startsWith("ws://ghostly.invalid/") && Module["ghostlyNet"])
++		{
++			s.con = 1;
++			s.ws = {bufferedAmount: 0, send: function(d) {Module["ghostlyNet"].send(d.slice());}, close: function() {Module["ghostlyNet"].close(s);}};
++			Module["ghostlyNet"].open(s, _protocol);
++			return _emscriptenfte_handle_alloc(s);
++		}
++		if (Module["ghostlyNet"])
++			return -1;
+ 		try {
+ 			s.ws = new WebSocket(_url, _protocol);
+ 		} catch(err) { console.log(err); }

@@ -1,0 +1,5 @@
+Engine: FTEQW, https://github.com/fte-team/fteqw, commit f937b9d88f71fc4429db5fe56c6a98d922711b2e, compiled to
+WebAssembly with the changes in engine/patches/ of this app's source. FTEQW descends from id Software's Quake engine
+source release. Copyright (C) 1996-1997 Id Software, Inc., and the FTE Team and contributors. Licensed under the GNU
+General Public License, version 2 (the full text follows). This app's complete corresponding source code, including the
+engine's source at that commit, the patches and the build recipe, is at https://github.com/MiguelMedeiros/ghostly-quake.

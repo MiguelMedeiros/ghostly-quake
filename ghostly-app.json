@@ -1,0 +1,17 @@
+{
+  "name": "arena",
+  "version": "1.0.0",
+  "kind": "mini-app",
+  "title": "Arena",
+  "tagline": "A deathmatch for two, live in your chat",
+  "description": "Open Arena in a chat, host a match on one of ten maps, and your contact joins from the invitation. One side's game runs the server and the other connects to it over the chat's live connection. Keyboard and mouse. Built on FTEQW, a GPL engine descended from id Software's Quake engine, with LibreQuake's free maps, models and sounds.",
+  "releaseNotes": "The first version: deathmatch for two on ten LibreQuake maps, hosted by one side and joined over the chat.",
+  "entry": "index.html",
+  "permissions": ["chat", "name"],
+  "view": "full",
+  "runtime": { "host": ">=1.2", "clients": ["web", "desktop"] },
+  "license": "GPL-2.0-only AND BSD-3-Clause",
+  "sources": ["https://raw.githubusercontent.com/MiguelMedeiros/ghostly-quake/HEAD/app.ghostlyapp"],
+  "homepage": "https://github.com/MiguelMedeiros/ghostly-quake",
+  "support": "https://github.com/MiguelMedeiros/ghostly-quake/issues"
+}

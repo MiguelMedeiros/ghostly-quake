@@ -1,0 +1,271 @@
+:root {
+  --bg: #0d0f14;
+  --panel: rgba(20, 23, 31, 0.94);
+  --text: #e8e9ee;
+  --muted: #9ba1b0;
+  --accent: #e2552d;
+  --accent-text: #fff;
+  --line: rgba(255, 255, 255, 0.12);
+  --ok: #4cc38a;
+  --field: #1b1f29;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --panel: rgba(250, 250, 252, 0.96);
+  --text: #1a1c22;
+  --muted: #5b6070;
+  --line: rgba(0, 0, 0, 0.12);
+  --field: #fff;
+  --ok: #1f8f5a;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+}
+
+#canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+  background: #000;
+}
+
+body:not(.in-game) #canvas {
+  visibility: hidden;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background:
+    radial-gradient(ellipse at top, rgba(226, 85, 45, 0.18), transparent 60%),
+    var(--bg);
+}
+
+.overlay[hidden],
+.bar[hidden] {
+  display: none;
+}
+
+.panel {
+  width: min(460px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px 20px 14px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+}
+
+.tagline {
+  margin: 2px 0 14px;
+  color: var(--muted);
+}
+
+.status {
+  margin: 0 0 14px;
+  padding-inline-start: 18px;
+  position: relative;
+  color: var(--muted);
+}
+
+.status::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 2px;
+  top: 0.5em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.status.online::before {
+  background: var(--ok);
+}
+
+.status.error {
+  color: var(--accent);
+}
+
+.notice {
+  margin: 0 0 12px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(226, 85, 45, 0.12);
+}
+
+.invitation {
+  margin: 0 0 16px;
+  padding: 12px;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+}
+
+.invitation p {
+  margin: 0 0 10px;
+}
+
+.host {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.field {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+select,
+input[type="range"] {
+  width: 100%;
+  font: inherit;
+  color: var(--text);
+}
+
+select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--field);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+details {
+  border-top: 1px solid var(--line);
+  padding: 8px 0;
+}
+
+summary {
+  cursor: pointer;
+  color: var(--muted);
+}
+
+details .field,
+details .check {
+  margin-top: 10px;
+}
+
+.check {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.controls p {
+  margin: 8px 0 0;
+}
+
+footer {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+footer p {
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+
+.bar {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), transparent);
+  color: #fff;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+.bar .label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar .stats {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+
+.bar button {
+  pointer-events: auto;
+  padding: 3px 10px;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+}
