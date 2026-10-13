@@ -19,6 +19,12 @@ import { gzipSync } from "fflate";
 /** FTEQW, the engine: GPL-2.0, https://github.com/fte-team/fteqw. */
 export const FTE_REPO = "https://github.com/fte-team/fteqw";
 export const FTE_COMMIT = "f937b9d88f71fc4429db5fe56c6a98d922711b2e";
+/**
+ * The version FTE's Makefile would read from git (`git-<count + 29>-<describe>`, the commit's date), given outright:
+ * in CI's container git refuses the checkout (another owner) and the version, which is in the binary, came out empty.
+ * The values are what the shallow clone above gives: one commit, patched ("dirty").
+ */
+export const FTE_VERSION = { SVN_VERSION: "git-30-f937b9d-dirty", SVN_DATE: "2026-06-04" };
 /** FTE's build config (engine/common/config_<name>.h). */
 export const FTE_CONFIG = "fteqw";
 /**
@@ -69,7 +75,7 @@ async function main() {
   const patches = readdirSync(join(root, "engine/patches")).filter((f) => f.endsWith(".patch")).sort();
   for (const patch of patches) run("git", ["apply", join(root, "engine/patches", patch)], src);
   await fetchChecked(ZLIB, join(src, "engine"));
-  run("docker", ["run", "--rm", "-v", `${src}:/src`, "-w", "/src/engine", image, "make", "-j8", "web-rel", `FTE_CONFIG=${FTE_CONFIG}`], root);
+  run("docker", ["run", "--rm", "-v", `${src}:/src`, "-w", "/src/engine", image, "make", "-j8", "web-rel", `FTE_CONFIG=${FTE_CONFIG}`, ...Object.entries(FTE_VERSION).map(([k, v]) => `${k}=${v}`)], root);
 
   const out = check ? join(build, "dist") : join(root, "engine/dist");
   mkdirSync(out, { recursive: true });
