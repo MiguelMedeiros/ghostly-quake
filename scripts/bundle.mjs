@@ -23,7 +23,7 @@ import { readBundleFiles } from "./files.mjs";
  * makes it then. Write it here in the commit that adds the first signed bundle; until then the check prints the key a
  * bundle was signed with and does not compare it.
  */
-export const PUBLISHER = null;
+export const PUBLISHER = "knx68tgybzgefamtcj77sy7e57frcbz1jszbm6icyp715bonw1uy";
 export const REPO = "MiguelMedeiros/ghostly-quake";
 export const BUNDLE = "app.ghostlyapp";
 /** Where clients read newer bundles: this repository's HEAD. The manifest's `sources` names it. */
