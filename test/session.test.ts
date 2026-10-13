@@ -118,6 +118,25 @@ describe("Session", () => {
     expect(ana.calls).toEqual(["host MMMMMMMMMMMMMMMM", "stop left", "join KKKKKKKKKKKKKKKK"]);
   });
 
+  it("hosting while invited keeps the lower match: no side waits for the other forever", async () => {
+    const lower = await opened(["CCCCCCCCCCCCCCCC"], ["ZZZZZZZZZZZZZZZZ"]);
+    lower.ana.session.host(terms);
+    await settle();
+    lower.bob.session.host({ ...terms, map: "lqdm8" });
+    await settle();
+    expect(lower.bob.session.state).toMatchObject({ kind: "playing", match: "CCCCCCCCCCCCCCCC", host: false });
+    expect(lower.ana.session.state).toMatchObject({ kind: "playing", match: "CCCCCCCCCCCCCCCC", host: true });
+
+    const higher = await opened(["YYYYYYYYYYYYYYYY"], ["BBBBBBBBBBBBBBBB"]);
+    higher.ana.session.host(terms);
+    await settle();
+    higher.bob.session.host({ ...terms, map: "lqdm8" });
+    await settle();
+    await settle();
+    expect(higher.ana.session.state).toMatchObject({ kind: "playing", match: "BBBBBBBBBBBBBBBB", host: false, terms: { map: "lqdm8" } });
+    expect(higher.bob.session.state).toMatchObject({ kind: "playing", match: "BBBBBBBBBBBBBBBB", host: true });
+  });
+
   it("passes the link's frames on, and ignores junk and other matches", async () => {
     const { a, ana } = await opened(["FFFFFFFFFFFFFFFF"]);
     ana.session.host(terms);

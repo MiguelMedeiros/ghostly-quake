@@ -66,6 +66,11 @@ export class Session {
   host(terms: MatchTerms): void {
     if (this.state.kind === "playing" || this.state.kind === "hosting") return;
     const match = this.makeId();
+    // Invited already: the rule for two hosts at once decides now, since the contact will not send its match again.
+    if (this.state.kind === "invited" && this.state.match < match) {
+      this.join();
+      return;
+    }
     this.setState({ kind: "hosting", match, terms });
     this.events.host(match, terms);
     this.sendHost();
